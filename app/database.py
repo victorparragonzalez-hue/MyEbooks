@@ -12,9 +12,11 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
+# Se captura la variable de seguridad del .env (con "require" por defecto por si falla)
+DB_SSLMODE = os.getenv("DB_SSLMODE", "require")
 
-# 3. Construir la URL de conexión para PostgreSQL (Driver psycopg2)
-SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+# 3. Construir la URL de conexión añadiendo los parámetros requeridos por Neon
+SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode={DB_SSLMODE}&channel_binding=require"
 
 # 4. Crear el "motor" que se comunicará con la base de datos
 engine = create_engine(SQLALCHEMY_DATABASE_URL)

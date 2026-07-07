@@ -1,8 +1,14 @@
 from fastapi import FastAPI
 from app.api import rutas_usuario, rutas_libros, rutas_lecturas
 from fastapi.middleware.cors import CORSMiddleware
+from app.database import engine, Base
+from app import models
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="MyEbooks API", version="1.0.0")
+
+
 
 # ==========================================
 # CONFIGURACIÓN DE CORS
