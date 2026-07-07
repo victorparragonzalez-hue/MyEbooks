@@ -17,9 +17,9 @@ app = FastAPI(title="MyEbooks API", version="1.0.0")
 # Se añaden los puertos más comunes de desarrollo Frontend (React, Vue, Angular, etc.)
 origenes_permitidos = [
 "http://localhost:3000",  # Permite pruebas desde el ordenador
-    "http://localhost:3001",
-    # "https://myebooks.vercel.app", # Aquí irá la URL de Vercel más adelante
-    # "https://www.myebooks.es",     # Aquí irá el dominio final
+"http://localhost:3001",
+"https://my-ebooks-vert.vercel.app/"
+# "https://www.myebooks.es",     # Aquí irá el dominio final
 ]
 
 # Se inyecta el "portero" en la aplicación
