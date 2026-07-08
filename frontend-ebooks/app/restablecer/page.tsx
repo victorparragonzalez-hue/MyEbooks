@@ -39,7 +39,7 @@ function FormularioRestablecer() {
     setCargando(true);
 
     try {
-      const respuesta = await fetch("https://myebooks-ka5x.onrender.com/usuarios/restablecer-password", {
+      const respuesta = await fetch("https://myebooks-ka5x.onrender.com/usuarios/-olvide-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, nueva_password: nuevaPassword }),
