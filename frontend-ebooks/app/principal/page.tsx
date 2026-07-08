@@ -204,6 +204,7 @@ export default function DashboardPage() {
     }
   };
 
+  
   const librosMostrar = libros.filter(libro => libro.estado === seccionActiva);
 
   return (

@@ -32,7 +32,7 @@ export default function RegistroPage() {
     setCargando(true);
 
     try {
-      const respuesta = await fetch("http://localhost:8000/usuarios/registro", {
+      const respuesta = await fetch("https://myebooks-ka5x.onrender.com/usuarios/registro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, email, password }),

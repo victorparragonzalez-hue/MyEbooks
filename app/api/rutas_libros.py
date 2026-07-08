@@ -28,7 +28,7 @@ async def buscar_libros_en_google(q: str = Query(min_length=2, description="Tít
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="La API Key de Google no está configurada en el servidor.")
 
     # Se mantiene verify=False para prevenir bloqueos de certificados locales en Windows 11
-    async with httpx.AsyncClient(timeout=10.0, verify=False) as client:
+    async with httpx.AsyncClient(timeout=20.0, verify=False) as client:
         try:
             response = await client.get(
                 google_url,
