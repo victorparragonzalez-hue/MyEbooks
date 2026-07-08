@@ -2,6 +2,7 @@ import os
 import smtplib
 from email.message import EmailMessage
 from datetime import datetime, timedelta
+import httpx
 from jose import jwt
 
 from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
@@ -93,24 +94,17 @@ def crear_token_recuperacion(email: str) -> str:
     return jwt.encode(datos, SECRET_KEY, algorithm=ALGORITHM)
 
 def enviar_correo_recuperacion(email_destino: str, token: str):
-    """Se conecta al servidor SMTP y envía el correo real."""
+    """Envía el correo saltándose el bloqueo SMTP usando la API HTTP de Brevo."""
     remitente = os.getenv("EMAIL_REMITENTE")
-    password = os.getenv("EMAIL_PASSWORD")
+    api_key = os.getenv("EMAIL_API_KEY")
     
-    if not remitente or not password:
+    if not remitente or not api_key:
         print("CUIDADO: Credenciales de correo no configuradas en el .env")
         return
-
-    # Se construye el mensaje base
-    msg = EmailMessage()
-    msg['Subject'] = "Recuperación de contraseña - MyEbooks"
-    msg['From'] = remitente
-    msg['To'] = email_destino
 
     link_recuperacion = f"https://my-ebooks-zeta.vercel.app/restablecer?token={token}"
     
     # 1. CAPA DE RESPALDO (Texto Plano)
-    # Se añade por si el lector usa un cliente de correo muy antiguo que bloquea el HTML
     contenido_texto = f"""Hola,
 
 Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en MyEbooks.
@@ -123,10 +117,8 @@ Este enlace es seguro y expirará en 1 hora. Si no has solicitado este cambio, p
 Atentamente,
 El equipo de MyEbooks.
 """
-    msg.set_content(contenido_texto)
 
     # 2. CAPA PRINCIPAL (HTML)
-    # Este es el diseño visual que verá el 99% de los usuarios, con el enlace oculto en un botón dorado
     contenido_html = f"""
     <!DOCTYPE html>
     <html>
@@ -167,21 +159,30 @@ El equipo de MyEbooks.
     </html>
     """
     
-    # La instrucción clave que le dice al correo que use el diseño HTML
-    msg.add_alternative(contenido_html, subtype='html')
-
-    # ... a partir de aquí continúa el try/except del servidor SMTP ...
-
-    # Se envía usando Gmail como servidor SMTP
-
-    print(f"Intentando enviar correo de recuperación a {email_destino}...")
+    # Se construye la petición para la API
+    headers = {
+        "accept": "application/json",
+        "api-key": api_key,
+        "content-type": "application/json"
+    }
+    
+    # Se inyecta tanto el HTML como el texto plano en el envío
+    payload = {
+        "sender": {"name": "MyEbooks", "email": remitente},
+        "to": [{"email": email_destino}],
+        "subject": "Recuperación de contraseña - MyEbooks",
+        "htmlContent": contenido_html,
+        "textContent": contenido_texto
+    }
+    
     try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(remitente, password)
-            server.send_message(msg)
-            print(f"Correo de recuperación enviado con éxito a {email_destino}")
+        print(f"Intentando enviar correo por API a {email_destino}...")
+        # Se envía la petición por la puerta segura HTTP (Puerto 443)
+        respuesta = httpx.post("https://api.brevo.com/v3/smtp/email", headers=headers, json=payload, timeout=10.0)
+        respuesta.raise_for_status()
+        print(f"Correo de recuperación enviado con éxito a {email_destino}")
     except Exception as e:
-        print(f"Error al enviar el correo: {e}")
+        print(f"Error al enviar el correo vía API: {e}")
 
 # ==========================================
 # RUTA: SOLICITAR RECUPERACIÓN DE CONTRASEÑA
