@@ -107,7 +107,7 @@ def enviar_correo_recuperacion(email_destino: str, token: str):
     msg['From'] = remitente
     msg['To'] = email_destino
 
-    link_recuperacion = f"http://localhost:3000/restablecer?token={token}"
+    link_recuperacion = f"https://my-ebooks-zeta.vercel.app/restablecer?token={token}"
     
     # 1. CAPA DE RESPALDO (Texto Plano)
     # Se añade por si el lector usa un cliente de correo muy antiguo que bloquea el HTML

@@ -25,7 +25,7 @@ export default function DashboardPage() {
 
   const cargarBiblioteca = useCallback(async (id_usuario: string) => {
     try {
-      const respuesta = await fetch(`https://myebooks-ka5x.onrender.com/${id_usuario}`);
+      const respuesta = await fetch(`https://myebooks-ka5x.onrender.com/lecturas/mis-libros/${id_usuario}`);
       if (!respuesta.ok) throw new Error("Fallo al cargar la biblioteca");
       
       const datos = await respuesta.json();
