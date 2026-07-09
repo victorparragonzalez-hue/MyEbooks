@@ -19,7 +19,7 @@ origenes_permitidos = [
 "http://localhost:3000",  # Permite pruebas desde el ordenador
 "http://localhost:3001",
 "https://my-ebooks-zeta.vercel.app"
-"https:// myebooks.es",
+"https://myebooks.es",
 "https://www.myebooks.es"     # Aquí irá el dominio final
 ]
 
