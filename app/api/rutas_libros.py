@@ -34,7 +34,7 @@ async def buscar_libros_en_google(q: str = Query(min_length=2, description="Tít
                 google_url,
                 params={
                     "q": q,
-                    "maxResults": 5,
+                    "maxResults": 10,
                     "key": api_key # <-- Aquí se inyecta la autorización
                 },
                 headers={"User-Agent": "MyEbooksPortfolioApp/1.0"}
