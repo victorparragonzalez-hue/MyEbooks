@@ -176,7 +176,11 @@ El equipo de MyEbooks.
     }
     
     try:
-        print(f"Intentando enviar correo por API a {email_destino}...")
+        if api_key:
+            print(f"CLAVE CARGADA: '{api_key[:10]}...'")
+        else:
+            print("CLAVE CARGADA: ¡ESTÁ VACÍA (None)!")
+            print("================================")
         # Se envía la petición por la puerta segura HTTP (Puerto 443)
         respuesta = httpx.post("https://api.brevo.com/v3/smtp/email", headers=headers, json=payload, timeout=10.0)
         respuesta.raise_for_status()
