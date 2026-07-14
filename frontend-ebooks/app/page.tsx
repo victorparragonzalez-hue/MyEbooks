@@ -17,11 +17,10 @@ export default function LandingPage() {
           position: 'relative',
           zIndex: 20,
           width: '100%',
-          /* Se ha eliminado el maxWidth para que se estire de lado a lado */
           display: 'flex',
           justifyContent: 'flex-end',
           gap: '16px',
-          padding: '20px 20px 0 0' /* Margen derecho añadido para mantener la elegancia */
+          padding: '20px 20px 0 0' 
         }}>
           <Link 
             href="/login" 
@@ -114,7 +113,7 @@ export default function LandingPage() {
             marginBottom: '40px' 
           }}>
             
-            {/* IMAGEN 1 (Cima): Buscador */}
+            {/* IMAGEN 1: Buscador */}
             <div style={{ width: '100%', maxWidth: '500px' }}>
               <h3 style={{ color: 'rgba(212, 180, 131, 0.9)', fontSize: '1.1rem', marginBottom: '12px' }}>
                 Encuentra cualquier obra

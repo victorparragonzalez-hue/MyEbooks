@@ -56,14 +56,14 @@ const manejarLogin = async (e: React.FormEvent) => {
   return (
     <main className="relative min-h-screen flex items-center justify-center p-4 bg-[#0a0806] overflow-hidden font-sans">
       
-      {/* 1. Fondo de la Biblioteca (Asegurar que la imagen existe en la carpeta public) */}
+      {/* 1. Fondo de la Biblioteca  */}
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center opacity-40"
         style={{ backgroundImage: "url('/libreriaa.jpg')" }}
       />
       <div className="absolute inset-0 z-0 bg-gradient-to-ba from-[#0a0806]/40 via-[#0a0806]/80 to-[#0a0806]" />
 
-      {/* 2. Tarjeta Principal (Glassmorphism oscuro con borde dorado sutil) */}
+      {/* 2. Tarjeta Principal */}
       <div className="relative z-10 w-full max-w-[460px] bg-[#0f0c09]/80 backdrop-blur-xl border border-[#d4b483]/20 rounded-3xl p-10 shadow-[0_30px_100px_rgba(0,0,0,0.8)]">
         
         {/* Cabecera y Logotipo */}
@@ -79,7 +79,7 @@ const manejarLogin = async (e: React.FormEvent) => {
             strokeLinecap="round" 
             strokeLinejoin="round"
           >
-            {/* Cubierta exterior (líneas más gruesas para simular la silueta oscura) */}
+            
             <path d="M2 13L4 4c3 2 6 3 8 4 2-1 5-2 8-4l2 9c-1 4-6 6-10 7.5C8 19 3 17 2 13z" strokeWidth="2.5" />
             
             {/* Lomo central de la encuadernación */}
@@ -95,7 +95,7 @@ const manejarLogin = async (e: React.FormEvent) => {
             <path d="M12 13.5c3-1 6-2 8-5" strokeWidth="1.5" />
             <path d="M12 16.5c3-1 6.5-1.5 9-4" strokeWidth="1.5" />
 
-            {/* Efecto 3D: Grosor del bloque de hojas en la base */}
+          
             <path d="M12 18.5c-4.5-1.5-8-3-9.5-6" />
             <path d="M12 18.5c4.5-1.5 8-3 9.5-6" />
 
@@ -163,7 +163,7 @@ const manejarLogin = async (e: React.FormEvent) => {
                 placeholder="••••••••"
                 className="w-full bg-[#14110e]/80 border border-[#d4b483]/30 rounded-xl py-3.5 pl-12 pr-12 text-[#f5f1e8] text-[13px] outline-none placeholder:text-[#f5f1e8]/20 focus:border-[#d4b483]/80 transition-all focus:bg-[#1a1612]/90 tracking-widest"
               />
-              {/* Botón de Ojo (Mostrar/Ocultar) */}
+              {/* Botón de (Mostrar/Ocultar) */}
               <button
                 type="button"
                 onClick={() => setMostrarPassword(!mostrarPassword)}
@@ -177,7 +177,7 @@ const manejarLogin = async (e: React.FormEvent) => {
               </button>
             </div>
             
-            {/* Olvidaste Contraseña alineado a la derecha */}
+            {/* Boton de olvidaste tu contraseña */}
             <div className="flex justify-end mt-3">
               <button 
                 type="button"

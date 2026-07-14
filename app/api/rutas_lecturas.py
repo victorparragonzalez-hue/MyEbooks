@@ -18,9 +18,10 @@ def agregar_libro_a_usuario(payload: schemas.AgregarLecturaRequest, db: Session 
     """
     
     # -------------------------------------------------------------
-    # PASO A: GESTIÓN AUTOMÁTICA DEL CATALOGO DE LIBROS
+    # PASO 1: GESTIÓN AUTOMÁTICA DEL CATALOGO DE LIBROS
     # -------------------------------------------------------------
     # Se busca si el libro ya fue guardado por cualquier otro usuario en el pasado
+
     libro = db.query(models.Libro).filter(models.Libro.google_books_id == payload.google_books_id).first()
     
     # Si es un libro completamente nuevo para la plataforma, se inserta automáticamente
@@ -38,7 +39,7 @@ def agregar_libro_a_usuario(payload: schemas.AgregarLecturaRequest, db: Session 
         db.refresh(libro) # Obtenemos el id_libro generado automáticamente (UUID)
 
     # -------------------------------------------------------------
-    # PASO B: EVITAR DUPLICADOS PARA EL MISMO USUARIO
+    # PASO 2: EVITAR DUPLICADOS PARA EL MISMO USUARIO
     # -------------------------------------------------------------
     # Se verifica si el usuario en cuestión ya tiene guardado este libro específico
     lectura_existente = db.query(models.MisLecturas).filter(
@@ -53,7 +54,7 @@ def agregar_libro_a_usuario(payload: schemas.AgregarLecturaRequest, db: Session 
         )
 
     # -------------------------------------------------------------
-    # PASO C: CREACIÓN DE LA RELACIÓN INTERMEDIA
+    # PASO 3: CREACIÓN DE LA RELACIÓN INTERMEDIA
     # -------------------------------------------------------------
     nueva_lectura = models.MisLecturas(
         id_usuario=payload.id_usuario,
@@ -148,7 +149,6 @@ def actualizar_lectura(
     
     # 3. Bucle dinámico de actualización
     for campo, valor in datos_actualizados.items():
-        # Si el valor es un Enum (como el estado), extraemos su texto puro (.value)
         if hasattr(valor, "value"):
             setattr(lectura, campo, valor.value)
         else:
@@ -166,7 +166,7 @@ def actualizar_lectura(
     }
 
 # ==========================================
-# RUTA 4: ELIMINAR UNA LECTURA (DELETE)
+# RUTA 4: ELIMINAR UNA LECTURA 
 # ==========================================
 @router.delete("/{id_lectura}", status_code=status.HTTP_200_OK)
 def eliminar_lectura(id_lectura: UUID, db: Session = Depends(get_db)):

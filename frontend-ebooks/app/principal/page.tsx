@@ -59,7 +59,7 @@ export default function DashboardPage() {
   }, [router, cargarBiblioteca]);
 
   // ==========================================
-  // NUEVA FUNCIÓN: CERRAR SESIÓN
+  // FUNCIÓN: CERRAR SESIÓN
   // ==========================================
   const cerrarSesion = () => {
     const confirmar = window.confirm("¿Seguro que deseas cerrar tu sesión?");
@@ -150,6 +150,10 @@ export default function DashboardPage() {
     setLibroActivo(null);
   };
 
+    // ==========================================
+  // FUNCIÓN: Buscar libro
+  // ==========================================
+
   const buscarEnBackend = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!queryBusqueda.trim()) return;
@@ -169,6 +173,10 @@ export default function DashboardPage() {
       setBuscando(false);
     }
   };
+
+    // ==========================================
+  // FUNCIÓN: Guardar libro en la biblioteca del usuario
+  // ==========================================
 
   const guardarLibroEnBackend = async (libroSeleccionado: any) => {
     if (!usuarioActual) return;
@@ -204,7 +212,9 @@ export default function DashboardPage() {
     }
   };
 
-  
+    // ==========================================
+  // FUNCIÓN: Filtrar libros según la sección activa
+  // ==========================================
   const librosMostrar = libros.filter(libro => libro.estado === seccionActiva);
 
   return (

@@ -79,7 +79,6 @@ def login(credenciales: schemas.LoginRequest, db: Session = Depends(get_db)):
 # ==========================================
 # RUTA 3: CAMBIO DE CONTRASEÑA
 # ==========================================
-# (Aquí estará la declaración del router: router = APIRouter(...))
 
 # ==========================================
 # FUNCIONES AUXILIARES PARA EL CORREO Y TOKEN
@@ -93,6 +92,8 @@ def crear_token_recuperacion(email: str) -> str:
     datos = {"sub": email, "exp": expiracion, "tipo": "recuperacion"}
     return jwt.encode(datos, SECRET_KEY, algorithm=ALGORITHM)
 
+
+
 def enviar_correo_recuperacion(email_destino: str, token: str):
     """Envía el correo saltándose el bloqueo SMTP usando la API HTTP de Brevo."""
     remitente = os.getenv("EMAIL_REMITENTE")
@@ -103,8 +104,7 @@ def enviar_correo_recuperacion(email_destino: str, token: str):
         return
 
     link_recuperacion = f"https://my-ebooks-zeta.vercel.app/restablecer?token={token}"
-    
-    # 1. CAPA DE RESPALDO (Texto Plano)
+
     contenido_texto = f"""Hola,
 
 Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en MyEbooks.
@@ -118,7 +118,7 @@ Atentamente,
 El equipo de MyEbooks.
 """
 
-    # 2. CAPA PRINCIPAL (HTML)
+    # 2. Contenido HTML del correo con estilo inline para compatibilidad
     contenido_html = f"""
     <!DOCTYPE html>
     <html>
@@ -255,7 +255,6 @@ def guardar_nueva_contrasena(
     # 3. Encriptar y guardar la nueva contraseña
     password_cifrada = encryptation.get_password_hash(payload.nueva_password)
     
-    # IMPORTANTE: Cambiar "hashed_password" por el nombre exacto de la columna en models.py
     usuario.password_hash = password_cifrada  
     print(f"Contraseña actualizada para el usuario {usuario.email} (ID: {usuario.id_usuario})")
     db.commit()

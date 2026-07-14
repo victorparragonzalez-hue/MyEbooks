@@ -3,7 +3,7 @@
 import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-// Se encapsula el formulario en un componente para poder usar Suspense (requerido por Next.js al leer parámetros de URL)
+// Se encapsula el formulario en un componente para poder usar Suspense 
 function FormularioRestablecer() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -53,10 +53,10 @@ function FormularioRestablecer() {
 
       setMensaje("¡Tu contraseña ha sido actualizada con éxito!");
       
-      // Redirige al login tras 3 segundos
+      // Redirige al login tras 2 segundos
       setTimeout(() => {
         router.push("/login");
-      }, 3000);
+      }, 2000);
 
     } catch (err: any) {
       setError(err.message);

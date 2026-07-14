@@ -20,22 +20,19 @@ async def buscar_libros_en_google(q: str = Query(min_length=2, description="Tít
     busca coincidencias y devuelve una lista limpia.
     """
     google_url = "https://www.googleapis.com/books/v1/volumes"
-    
-    # Extraemos la clave de forma segura
     api_key = os.getenv("API_KEY")
 
     if not api_key:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="La API Key de Google no está configurada en el servidor.")
 
-    # Se mantiene verify=False para prevenir bloqueos de certificados locales en Windows 11
     async with httpx.AsyncClient(timeout=20.0, verify=False) as client:
         try:
             response = await client.get(
                 google_url,
                 params={
-                    "q": q,
+                    "q": f"intitle:{q}",
                     "maxResults": 10,
-                    "key": api_key # <-- Aquí se inyecta la autorización
+                    "key": api_key 
                 },
                 headers={"User-Agent": "MyEbooksPortfolioApp/1.0"}
             )

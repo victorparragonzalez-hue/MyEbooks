@@ -13,6 +13,4 @@ class Usuario(Base):
     email = Column(String(150), unique=True, nullable=False, index=True)
     password_hash = Column(String(255), nullable=False)
     fecha_registro = Column(DateTime(timezone=True), server_default=func.now())
-
-    # Relación "Uno a Muchos" con las lecturas
     lecturas = relationship("MisLecturas", back_populates="usuario")
