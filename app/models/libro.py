@@ -14,6 +14,4 @@ class Libro(Base):
     autor = Column(String(150), nullable=False)
     sinopsis = Column(Text, nullable=True)
     imagen_portada = Column(String(500), nullable=True)
-
-    # Relación "Uno a Muchos" con las lecturas
     lecturas = relationship("MisLecturas", back_populates="libro")

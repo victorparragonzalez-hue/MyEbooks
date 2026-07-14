@@ -14,13 +14,11 @@ app = FastAPI(title="MyEbooks API", version="1.0.0")
 # CONFIGURACIÓN DE CORS
 # ==========================================
 # Aquí se define qué direcciones web tienen permiso para hablar con esta API.
-# Se añaden los puertos más comunes de desarrollo Frontend (React, Vue, Angular, etc.)
 origenes_permitidos = [
 "http://localhost:3000",  # Permite pruebas desde el ordenador
-"http://localhost:3001",
 "https://my-ebooks-zeta.vercel.app",
 "https://myebooks.es",
-"https://www.myebooks.es"     # Aquí irá el dominio final
+"https://www.myebooks.es" 
 ]
 
 # Se inyecta el "portero" en la aplicación

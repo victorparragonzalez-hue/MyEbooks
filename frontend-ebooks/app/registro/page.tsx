@@ -23,7 +23,9 @@ export default function RegistroPage() {
     e.preventDefault();
     setError("");
 
-    // VALIDACIÓN LOCAL: Comprobación de coincidencia de contraseñas
+  // ==========================================
+  // cOMPROBACION QUE COMPRUEBA SI LAS CONTRASEÑAS COINCIDEN ANTES DE GUARDAR
+  // ==========================================
     if (password !== confirmarPassword) {
       setError("Las contraseñas introducidas no coinciden.");
       return;

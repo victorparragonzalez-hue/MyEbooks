@@ -32,7 +32,6 @@ export default function OlvidePasswordPage() {
       }
 
       if (!respuesta.ok) {
-        // AQUÍ ESTÁ LA MAGIA: Si el servidor devuelve un 404 (No encontrado), forzamos un mensaje conciso
         if (respuesta.status === 404) {
           throw new Error("No existe ninguna cuenta asociada a este correo.");
         }
@@ -43,7 +42,7 @@ export default function OlvidePasswordPage() {
         throw new Error(mensajeError);
       } 
 
-      // Si todo va bien, el mensaje ahora es directo y afirmativo
+      // Comprobació exitosa, mostrar mensaje de éxito
       setMensaje("Enlace de recuperación enviado. Revisa tu bandeja de entrada.");
       setEmail(""); 
       
