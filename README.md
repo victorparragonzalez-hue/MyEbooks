@@ -8,10 +8,10 @@ Con esta aplicación web podréis registrar todos los libros que habéis leído,
 
 ## 📑 Índice
 
-* [Acceso a la Aplicación](#-acceso-a-la-aplicación)
-* [Características principales](#-características-principales)
-* [Tecnologías utilizadas](#-tecnologías-utilizadas)
-* [Contacto](#-contacto)
+* [Acceso a la Aplicación](#acceso-a-la-aplicación)
+* [Características principales](#características-principales)
+* [Tecnologías utilizadas](#tecnologías-utilizadas)
+* [Contacto](#contacto)
 
 ---
 
@@ -61,12 +61,11 @@ La aplicación web está desplegada y accesible para todo el que lo desee. Basta
 
 ### Base de Datos, Despliegue y Alojamiento
 
-* **Neon:** Plataforma donde esta alojado la base de datos PostgreSQL.
+* **Neon:** Plataforma en la nube donde está alojada la base de datos PostgreSQL.
   
-* **Render:** Plataforma en la nube donde se aloja el backend y la base de datos de producción, asegurando que la API esté siempre disponible.
+* **Render:** Plataforma en la nube donde se aloja el backend de producción, asegurando que la API esté siempre disponible.
   
 * **Hostinger:** Proveedor utilizado para el registro y la gestión del dominio personalizado del proyecto.
-  
 
 ---
 
@@ -74,6 +73,6 @@ La aplicación web está desplegada y accesible para todo el que lo desee. Basta
 
 Desarrollado por Victor Parra.
 
-Si te ha gustado o tienes alguna sugerencia, porfavor no dudes en contactarme.
+Si te ha gustado el proyecto o tienes alguna sugerencia, por favor, no dudes en contactarme.
 
-👉 **[linkedin](www.linkedin.com/in/victorrparra)**
+👉 **[LinkedIn](https://www.linkedin.com/in/victorrparra)**
